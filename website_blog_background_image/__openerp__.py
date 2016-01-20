@@ -6,7 +6,7 @@
 {
     'name': 'Website Blog Background Image',
     'summary': 'Select an image to assign it to blg post',
-    'version': '8.0.1.0.0',
+    'version': '9.0.1.0.0',
     'category': "website",
     'author': 'Incaser Informatica S.L., '
               'Odoo Community Association (OCA)',

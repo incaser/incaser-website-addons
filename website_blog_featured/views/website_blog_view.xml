@@ -4,12 +4,12 @@
 
 <!-- page form view  -->
 <record id="view_blog_post_form" model="ir.ui.view">
-    <field name="name">blog.post.background.image.form</field>
+    <field name="name">blog.post.featured.image.form</field>
     <field name="model">blog.post</field>
     <field name="inherit_id" ref="website_blog.view_blog_post_form"/>
     <field name="arch" type="xml">
         <field name="subtitle" position="after">
-            <field name="background_image" widget="image"/>
+            <field name="featured_image" widget="image"/>
         </field>
     </field>
 </record>

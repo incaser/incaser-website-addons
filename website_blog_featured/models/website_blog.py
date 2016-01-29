@@ -9,4 +9,4 @@ from openerp import fields, models
 class BlogPost(models.Model):
     _inherit = 'blog.post'
 
-    background_image = fields.Binary(string='Background Image')
+    featured_image = fields.Binary(string='Featured Image')

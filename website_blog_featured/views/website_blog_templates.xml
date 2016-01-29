@@ -4,21 +4,13 @@
 
 <template id="assets_frontend" inherit_id="website.assets_frontend" name="Blog Custom Front-end assets">
     <xpath expr="." position="inside">
-        <link rel='stylesheet' href='/website_blog_custom/static/src/css/website_blog_custom.css'/>
+        <link rel='stylesheet' href='/website_blog_featured/static/src/css/website_blog_featured.css'/>
     </xpath>
 </template>
 
 <!-- Blog Post List: Displaying a list of Blog Posts -->
 <template id="website_blog.blog_post_short" name="Blog Posts">
     <t t-call="website_blog.index">
-        <t t-set="head">
-            <link t-att-href="'/blog/%s/feed' % (blog.id)" type="application/atom+xml" rel="alternate" title="Atom Feed"/>
-        </t>
-        <div class="container">
-            <t t-call="website.pager" >
-                <t t-set="classname">pull-right</t>
-            </t>
-        </div>
         <div class="oe_structure title-barcode">
             <section class="mb0">
                 <div class="container">
@@ -37,6 +29,11 @@
             </section>
         </div>
         <div class="container">
+            <t t-call="website.pager" >
+                <t t-set="classname">pull-right</t>
+            </t>
+        </div>
+        <div class="container">
             <div class="row mt32 mb32">
               <div class="col-md-8 col-md-offset-2" t-ignore="True" id="main_column">
 
@@ -48,22 +45,37 @@
                     Click on "Content" on the top menu to write your first blog post.
                   </p>
                 </div>
-                <t t-if="blog_posts">
-                    <t t-call="website_blog_custom.highlight_post">
-                        <t t-set="blog_post" t-value="blog_posts[0]"/>
-                    </t>
-                    <div t-if="len(blog_posts) != 0">
-                        <h3>Other posts</h3>
-                        <hr/>
-                    </div>
-                </t>
                 <t t-foreach="blog_posts" t-as="blog_post">
-                    <t t-call="website_blog_custom.post_list_column">
-                        <t t-set="blog_post" t-value="blog_post"/>
+                    <t t-if="blog_post_first">
+                        <t t-call="website_blog_featured.highlight_post">
+                            <t t-set="blog_post" t-value="blog_post"/>
+                        </t>
+                        <div t-if="len(blog_posts) != 0">
+                            <h3>Other posts</h3>
+                            <hr/>
+                        </div>
                     </t>
-                    <div name='blog_post_data' class='mb0 hidden'/>
-                    <div t-if="(blog_post_index + 1) % 3 == 0" class="clearfix"/>
-                    <hr t-if="(blog_post_index + 1) % 3 == 0"/>
+                    <t t-if="not blog_post_first">
+                        <t t-if="blog_post_index &lt; 4">
+                            <t t-call="website_blog_featured.post_list_column">
+                                <t t-set="blog_post" t-value="blog_post"/>
+                            </t>
+                            <div name='blog_post_data' class='mb0 hidden'/>
+                            <div t-if="(blog_post_index) % 3 == 0" class="clearfix"/>
+                            <hr t-if="(blog_post_index) % 3 == 0"/>
+                        </t>
+                        <t t-if="blog_post_index &gt;= 4">
+                            <t t-call="website_blog_featured.post_list_list">
+                                <t t-set="blog_post" t-value="blog_post"/>
+                            </t>
+                            <div name='blog_post_data' class='mb0 hidden'/>
+                            <div class="hidden">
+                            <span t-field="blog_post.create_date"
+                                  t-field-options='{"format": "MMMM"}'
+                                  class='mb0 hidden'/>
+                            </div>
+                        </t>
+                    </t>
                 </t>
               </div>
             </div>
@@ -80,6 +92,9 @@
                     <a t-attf-href="/blog/#{ slug(blog_post.blog_id) }/post/#{ slug(blog_post) }">
                         <h2 t-field="blog_post.name" class="no-padding no-margin"><t t-if="not blog_post.name">Untitled Post</t></h2>
                     </a>
+                                <span t-if="not blog_post.website_published"
+                  class="label label-danger">not published</span>
+
                 </div>
             </div>
             <div class="row">
@@ -96,7 +111,7 @@
         <div class="col-md-10">
             <div class="image">
                 <span id="image"
-                      t-field="blog_post.background_image"
+                      t-field="blog_post.featured_image"
                       t-field-options='{"widget": "image", "class": "product_detail_img", "alt-field": "title"}'
                       class="img-responsive shadow"/>
             </div>
@@ -118,7 +133,7 @@
         <div class="col-md-12">
             <div class="image">
                 <span id="image"
-                      t-field="blog_post.background_image"
+                      t-field="blog_post.featured_image"
                       t-field-options='{"widget": "image", "class": "product_detail_img", "alt-field": "title"}'
                       class="img-responsive shadow"/>
             </div>
@@ -126,13 +141,12 @@
     </div>
 </template>
 
-<!-- Page -->
-<template id="website_blog.index" name="Blog Navigation">
-    <t t-call="website.layout">
-        <div id="wrap" class="js_blog website_blog">
-            <t t-raw="0"/>
-        </div>
-    </t>
+<template id="post_list_list">
+    <div class="col-md-12">
+        <a t-attf-href="/blog/#{ slug(blog_post.blog_id) }/post/#{ slug(blog_post) }">
+            <h4 t-field="blog_post.name" class="mb0 mt0 no-padding"><t t-if="not blog_post.name">Untitled Post</t></h4>
+        </a>
+    </div>
 </template>
 
 <template id="blog_post_complete" inherit_id="website_blog.blog_post_complete">
@@ -140,9 +154,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4 col-md-offset-4">
-                    <h4 class="text-center">Select background image</h4>
-                    <span id="background_image"
-                          t-field="blog_post.background_image"
+                    <h4 class="text-center">Select featured image</h4>
+                    <span id="featured_image"
+                          t-field="blog_post.featured_image"
                           t-field-options='{"widget": "image", "class": "product_detail_img", "alt-field": "title"}'
                           />
                 </div>

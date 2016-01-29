@@ -1,10 +1,10 @@
 .title-barcode{
-    background-image: url("/website_blog_custom/static/src/img/bg_line_v.png");
+    background-image: url("/website_blog_featured/static/src/img/bg_line_v.png");
     height: 115px;
 }
 
 .title-barcode-compress{
-    background-image: url("/website_blog_custom/static/src/img/bg_line_v_compress.png");
+    background-image: url("/website_blog_featured/static/src/img/bg_line_v_compress.png");
     height: 115px;
 }
 

@@ -19,3 +19,12 @@
 .bg-white{
     background-color: white;
 }
+
+.featured_img_container{
+    max-width: 150px;
+    margin: 0 auto;
+}
+
+div .cover .blog_title {
+    position: inherit;
+}

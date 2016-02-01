@@ -21,9 +21,7 @@
                                 <h3 class="text-muted mb16" t-field="blog.subtitle"/>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-lg-offset-1 col-sm-4 hidden-xs">
-
-                        </div>
+                        <div class="col-lg-3 col-lg-offset-1 col-sm-4 hidden-xs"/>
                     </div>
                 </div>
             </section>
@@ -35,48 +33,47 @@
         </div>
         <div class="container">
             <div class="row mt32 mb32">
-              <div class="col-md-8 col-md-offset-2" t-ignore="True" id="main_column">
-
-                <div t-if="not blog_posts" class="container mb64">
-                  <p class="css_editable_hidden">
-                    <h1>No blog post yet.</h1>
-                  </p>
-                  <p groups="base.group_website_designer">
-                    Click on "Content" on the top menu to write your first blog post.
-                  </p>
-                </div>
-                <t t-foreach="blog_posts" t-as="blog_post">
-                    <t t-if="blog_post_first">
-                        <t t-call="website_blog_featured.highlight_post">
-                            <t t-set="blog_post" t-value="blog_post"/>
-                        </t>
-                        <div t-if="len(blog_posts) != 0">
-                            <h3>Other posts</h3>
-                            <hr/>
-                        </div>
-                    </t>
-                    <t t-if="not blog_post_first">
-                        <t t-if="blog_post_index &lt; 4">
-                            <t t-call="website_blog_featured.post_list_column">
+                <div class="col-md-8 col-md-offset-2" t-ignore="True" id="main_column">
+                    <div t-if="not blog_posts" class="container mb64">
+                        <p class="css_editable_hidden">
+                            <h1>No blog post yet.</h1>
+                        </p>
+                        <p groups="base.group_website_designer">
+                            Click on "Content" on the top menu to write your first blog post.
+                        </p>
+                    </div>
+                    <t t-foreach="blog_posts" t-as="blog_post">
+                        <t t-if="blog_post_first">
+                            <t t-call="website_blog_featured.highlight_post">
                                 <t t-set="blog_post" t-value="blog_post"/>
                             </t>
-                            <div name='blog_post_data' class='mb0 hidden'/>
-                            <div t-if="(blog_post_index) % 3 == 0" class="clearfix"/>
-                            <hr t-if="(blog_post_index) % 3 == 0"/>
-                        </t>
-                        <t t-if="blog_post_index &gt;= 4">
-                            <t t-call="website_blog_featured.post_list_list">
-                                <t t-set="blog_post" t-value="blog_post"/>
-                            </t>
-                            <div name='blog_post_data' class='mb0 hidden'/>
-                            <div class="hidden">
-                            <span t-field="blog_post.create_date"
-                                  t-field-options='{"format": "MMMM"}'
-                                  class='mb0 hidden'/>
+                            <div t-if="len(blog_posts) &gt; 0">
+                                <h3>Other posts</h3>
+                                <hr/>
                             </div>
                         </t>
+                        <t t-if="not blog_post_first">
+                            <t t-if="blog_post_index &lt; 4">
+                                <t t-call="website_blog_featured.post_list_column">
+                                    <t t-set="blog_post" t-value="blog_post"/>
+                                </t>
+                                <div name='blog_post_data' class='mb0 hidden'/>
+                                <div t-if="(blog_post_index) % 3 == 0" class="clearfix"/>
+                                <hr t-if="(blog_post_index) % 3 == 0"/>
+                            </t>
+                            <t t-if="blog_post_index &gt;= 4">
+                                <t t-call="website_blog_featured.post_list_list">
+                                    <t t-set="blog_post" t-value="blog_post"/>
+                                </t>
+                                <div name='blog_post_data' class='mb0 hidden'/>
+                                <div class="hidden">
+                                    <span t-field="blog_post.create_date"
+                                          t-field-options='{"format": "MMMM"}'
+                                          class='mb0 hidden'/>
+                                </div>
+                            </t>
+                        </t>
                     </t>
-                </t>
               </div>
             </div>
         </div>
@@ -134,8 +131,10 @@
             <div class="image">
                 <span id="image"
                       t-field="blog_post.featured_image"
-                      t-field-options='{"widget": "image", "class": "product_detail_img", "alt-field": "title"}'
-                      class="img-responsive shadow"/>
+                      t-field-options='{"widget": "image",
+                                        "class": "product_detail_img",
+                                        "alt-field": "title"}'
+                      class="img-responsive"/>
             </div>
         </div>
     </div>
@@ -157,11 +156,17 @@
                     <h4 class="text-center">Select featured image</h4>
                     <span id="featured_image"
                           t-field="blog_post.featured_image"
-                          t-field-options='{"widget": "image", "class": "product_detail_img", "alt-field": "title"}'
+                          t-field-options='{
+                            "widget": "image",
+                            "class": "featured_img_container",
+                            "alt-field": "title"}'
                           />
                 </div>
             </div>
         </div>
+    </xpath>
+    <xpath expr="//div[@class='blog_title']" position="before">
+        <div class="clearfix"/>
     </xpath>
 </template>
 

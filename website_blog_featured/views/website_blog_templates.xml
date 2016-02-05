@@ -11,7 +11,7 @@
 <!-- Blog Post List: Displaying a list of Blog Posts -->
 <template id="website_blog.blog_post_short" name="Blog Posts">
     <t t-call="website_blog.index">
-        <div class="oe_structure title-barcode">
+        <div class="oe_structure title-barcode mt8">
             <section class="mb0">
                 <div class="container">
                     <div class="row">

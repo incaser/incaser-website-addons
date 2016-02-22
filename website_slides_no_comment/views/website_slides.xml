@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<openerp>
+<data>
+
+<!-- Delete section comments -->
+<template id="slide_detail_view"
+          inherit_id="website_slides.slide_detail_view">
+    <xpath expr="//a[@href='#discuss']/.." position="replace"/>
+    <xpath expr="//div[@id='discuss']" position="replace"/>
+</template>
+
+</data>
+</openerp>

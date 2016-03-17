@@ -17,7 +17,8 @@
 			<div class="o_panel_header">
 				<span class="fa-stack">
 					<i class="fa fa-user fa-stack-1x"></i>
-				</span> Custom Snippets
+				</span>
+				<span id="title_custom_snippet"> Custom Snippets </span>
 			</div>
 			<div id="custom_snippet" class="o_panel_body">
 				<!--To adds snippets by other modules-->

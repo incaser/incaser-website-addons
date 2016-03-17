@@ -20,9 +20,8 @@
 				</span>
 				<span id="title_custom_snippet"> Custom Snippets </span>
 			</div>
-			<div id="custom_snippet" class="o_panel_body">
-				<!--To adds snippets by other modules-->
-			</div>
+			<!--To adds snippets by other modules-->
+			<div id="custom_snippet" class="o_panel_body"/>
 		</div>
 	</xpath>
 </template>

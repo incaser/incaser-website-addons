@@ -1,0 +1,23 @@
+/* expanding input CSS only */
+
+.title-barcode{
+    background-image: url("/website_snippet_green/static/src/img/bg_line_v.png");
+    height: 115px;
+}
+
+.title-barcode-compress{
+    background-image: url("/website_snippet_green/static/src/img/bg_line_v_compress.png");
+    height: 115px;
+}
+
+.no-padding{
+    padding: 2px;
+}
+
+.no-margin{
+    margin: 2px;
+}
+
+.bg-white{
+    background-color: white;
+}

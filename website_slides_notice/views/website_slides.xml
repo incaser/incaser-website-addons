@@ -6,9 +6,9 @@
           inherit_id="website_slides.slide_detail_view">
     <xpath expr="//a[@t-attf-href='/slides/#{slug(slide.channel_id)}']/../../.."
            position="before">
-        <div t-if="notice" id="slide_notice" class="row mt4 mb0">
+        <div t-if="slide.category_id.notice" id="slide_notice" class="row mt4 mb0">
             <div class="col-md-12">
-                <div class="alert alert-info">
+                <div t-attf-class="alert #{slide.category_id.notice_level}">
                     <span t-field="slide.category_id.notice"/>
                 </div>
             </div>

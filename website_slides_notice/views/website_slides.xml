@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<openerp>
+<data>
+
+<template id="slide_detail_view"
+          inherit_id="website_slides.slide_detail_view">
+    <xpath expr="//a[@t-attf-href='/slides/#{slug(slide.channel_id)}']/../../.."
+           position="before">
+        <div t-if="notice" id="slide_notice" class="row mt4 mb0">
+            <div class="col-md-12">
+                <div class="alert alert-info">
+                    <span t-field="slide.category_id.notice"/>
+                </div>
+            </div>
+        </div>
+    </xpath>
+</template>
+
+</data>
+</openerp>

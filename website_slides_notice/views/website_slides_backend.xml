@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+    <!-- SLIDE.CATEGORY -->
+    <record id="view_slides_category_form" model="ir.ui.view">
+        <field name="name">slide.category.form</field>
+        <field name="model">slide.category</field>
+        <field name="inherit_id" ref="website_slides.view_slides_category_form"/>
+        <field name="arch" type="xml">
+            <field name="channel_id" position="after">
+                <group string="Notice" colspan="4">
+                    <field name="notice" nolabel="1"/>
+                </group>
+            </field>
+        </field>
+    </record>
+
+    </data>
+</openerp>
